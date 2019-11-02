@@ -1,0 +1,3 @@
+cometidoNacionales:
+    path: /cometidosNacionales
+    controller: App\Controller\CometidoNacionalesController::getAll
