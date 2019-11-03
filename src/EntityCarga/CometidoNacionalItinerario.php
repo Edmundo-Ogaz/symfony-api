@@ -77,5 +77,94 @@ class CometidoNacionalItinerario
      */
     private $idDistribucion;
 
+    public function getIdItinerario(): ?int
+    {
+        return $this->idItinerario;
+    }
+
+    public function getFechaInicio(): ?\DateTimeInterface
+    {
+        return $this->fechaInicio;
+    }
+
+    public function setFechaInicio(\DateTimeInterface $fechaInicio): self
+    {
+        $this->fechaInicio = $fechaInicio;
+
+        return $this;
+    }
+
+    public function getFechaTermino(): ?\DateTimeInterface
+    {
+        return $this->fechaTermino;
+    }
+
+    public function setFechaTermino(\DateTimeInterface $fechaTermino): self
+    {
+        $this->fechaTermino = $fechaTermino;
+
+        return $this;
+    }
+
+    public function getHoraInicio(): ?\DateTimeInterface
+    {
+        return $this->horaInicio;
+    }
+
+    public function setHoraInicio(\DateTimeInterface $horaInicio): self
+    {
+        $this->horaInicio = $horaInicio;
+
+        return $this;
+    }
+
+    public function getHoraTermino(): ?\DateTimeInterface
+    {
+        return $this->horaTermino;
+    }
+
+    public function setHoraTermino(\DateTimeInterface $horaTermino): self
+    {
+        $this->horaTermino = $horaTermino;
+
+        return $this;
+    }
+
+    public function getDetalle(): ?string
+    {
+        return $this->detalle;
+    }
+
+    public function setDetalle(?string $detalle): self
+    {
+        $this->detalle = $detalle;
+
+        return $this;
+    }
+
+    public function getIdCometidoNacional(): ?CometidoNacional
+    {
+        return $this->idCometidoNacional;
+    }
+
+    public function setIdCometidoNacional(?CometidoNacional $idCometidoNacional): self
+    {
+        $this->idCometidoNacional = $idCometidoNacional;
+
+        return $this;
+    }
+
+    public function getIdDistribucion(): ?DistribucionGeografica
+    {
+        return $this->idDistribucion;
+    }
+
+    public function setIdDistribucion(?DistribucionGeografica $idDistribucion): self
+    {
+        $this->idDistribucion = $idDistribucion;
+
+        return $this;
+    }
+
 
 }

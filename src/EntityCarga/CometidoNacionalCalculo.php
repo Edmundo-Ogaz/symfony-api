@@ -70,5 +70,82 @@ class CometidoNacionalCalculo
      */
     private $idItinerario;
 
+    public function getIdCalculo(): ?int
+    {
+        return $this->idCalculo;
+    }
+
+    public function getDia(): ?\DateTimeInterface
+    {
+        return $this->dia;
+    }
+
+    public function setDia(\DateTimeInterface $dia): self
+    {
+        $this->dia = $dia;
+
+        return $this;
+    }
+
+    public function getValor(): ?int
+    {
+        return $this->valor;
+    }
+
+    public function setValor(?int $valor): self
+    {
+        $this->valor = $valor;
+
+        return $this;
+    }
+
+    public function getPorcentajeCometido(): ?int
+    {
+        return $this->porcentajeCometido;
+    }
+
+    public function setPorcentajeCometido(?int $porcentajeCometido): self
+    {
+        $this->porcentajeCometido = $porcentajeCometido;
+
+        return $this;
+    }
+
+    public function getFechaRegistro(): ?\DateTimeInterface
+    {
+        return $this->fechaRegistro;
+    }
+
+    public function setFechaRegistro(\DateTimeInterface $fechaRegistro): self
+    {
+        $this->fechaRegistro = $fechaRegistro;
+
+        return $this;
+    }
+
+    public function getIdCometido(): ?CometidoNacional
+    {
+        return $this->idCometido;
+    }
+
+    public function setIdCometido(?CometidoNacional $idCometido): self
+    {
+        $this->idCometido = $idCometido;
+
+        return $this;
+    }
+
+    public function getIdItinerario(): ?CometidoNacionalItinerario
+    {
+        return $this->idItinerario;
+    }
+
+    public function setIdItinerario(?CometidoNacionalItinerario $idItinerario): self
+    {
+        $this->idItinerario = $idItinerario;
+
+        return $this;
+    }
+
 
 }

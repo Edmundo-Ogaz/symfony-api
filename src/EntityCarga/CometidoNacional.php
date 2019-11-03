@@ -2,6 +2,8 @@
 
 namespace App\EntityCarga;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -102,6 +104,133 @@ class CometidoNacional
     public function __construct()
     {
         $this->idTipoGasto = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getIdCaso(): ?int
+    {
+        return $this->idCaso;
+    }
+
+    public function setIdCaso(?int $idCaso): self
+    {
+        $this->idCaso = $idCaso;
+
+        return $this;
+    }
+
+    public function getRut(): ?string
+    {
+        return $this->rut;
+    }
+
+    public function setRut(string $rut): self
+    {
+        $this->rut = $rut;
+
+        return $this;
+    }
+
+    public function getMotivo(): ?string
+    {
+        return $this->motivo;
+    }
+
+    public function setMotivo(string $motivo): self
+    {
+        $this->motivo = $motivo;
+
+        return $this;
+    }
+
+    public function getPasajeAereo(): ?bool
+    {
+        return $this->pasajeAereo;
+    }
+
+    public function setPasajeAereo(bool $pasajeAereo): self
+    {
+        $this->pasajeAereo = $pasajeAereo;
+
+        return $this;
+    }
+
+    public function getFechaCreacion(): ?\DateTimeInterface
+    {
+        return $this->fechaCreacion;
+    }
+
+    public function setFechaCreacion(\DateTimeInterface $fechaCreacion): self
+    {
+        $this->fechaCreacion = $fechaCreacion;
+
+        return $this;
+    }
+
+    public function getFechaModificacion(): ?\DateTimeInterface
+    {
+        return $this->fechaModificacion;
+    }
+
+    public function setFechaModificacion(?\DateTimeInterface $fechaModificacion): self
+    {
+        $this->fechaModificacion = $fechaModificacion;
+
+        return $this;
+    }
+
+    public function getFechaEnvio(): ?\DateTimeInterface
+    {
+        return $this->fechaEnvio;
+    }
+
+    public function setFechaEnvio(?\DateTimeInterface $fechaEnvio): self
+    {
+        $this->fechaEnvio = $fechaEnvio;
+
+        return $this;
+    }
+
+    public function getIdEstado(): ?CometidoEstados
+    {
+        return $this->idEstado;
+    }
+
+    public function setIdEstado(?CometidoEstados $idEstado): self
+    {
+        $this->idEstado = $idEstado;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|TipoGastosCometidos[]
+     */
+    public function getIdTipoGasto(): Collection
+    {
+        return $this->idTipoGasto;
+    }
+
+    public function addIdTipoGasto(TipoGastosCometidos $idTipoGasto): self
+    {
+        if (!$this->idTipoGasto->contains($idTipoGasto)) {
+            $this->idTipoGasto[] = $idTipoGasto;
+        }
+
+        return $this;
+    }
+
+    public function removeIdTipoGasto(TipoGastosCometidos $idTipoGasto): self
+    {
+        if ($this->idTipoGasto->contains($idTipoGasto)) {
+            $this->idTipoGasto->removeElement($idTipoGasto);
+        }
+
+        return $this;
     }
 
 }

@@ -71,5 +71,94 @@ class DistribucionGeografica
      */
     private $estadoregistro;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getRegion(): ?int
+    {
+        return $this->region;
+    }
+
+    public function setRegion(?int $region): self
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    public function getProvincia(): ?int
+    {
+        return $this->provincia;
+    }
+
+    public function setProvincia(?int $provincia): self
+    {
+        $this->provincia = $provincia;
+
+        return $this;
+    }
+
+    public function getComuna(): ?int
+    {
+        return $this->comuna;
+    }
+
+    public function setComuna(?int $comuna): self
+    {
+        $this->comuna = $comuna;
+
+        return $this;
+    }
+
+    public function getGlosa(): ?string
+    {
+        return $this->glosa;
+    }
+
+    public function setGlosa(?string $glosa): self
+    {
+        $this->glosa = $glosa;
+
+        return $this;
+    }
+
+    public function getNivel(): ?int
+    {
+        return $this->nivel;
+    }
+
+    public function setNivel(?int $nivel): self
+    {
+        $this->nivel = $nivel;
+
+        return $this;
+    }
+
+    public function getOrden(): ?int
+    {
+        return $this->orden;
+    }
+
+    public function setOrden(?int $orden): self
+    {
+        $this->orden = $orden;
+
+        return $this;
+    }
+
+    public function getEstadoregistro(): ?bool
+    {
+        return $this->estadoregistro;
+    }
+
+    public function setEstadoregistro(?bool $estadoregistro): self
+    {
+        $this->estadoregistro = $estadoregistro;
+
+        return $this;
+    }
+
 
 }

@@ -43,5 +43,46 @@ class ResolucionValores
      */
     private $estado;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getFechaInicio(): ?\DateTimeInterface
+    {
+        return $this->fechaInicio;
+    }
+
+    public function setFechaInicio(?\DateTimeInterface $fechaInicio): self
+    {
+        $this->fechaInicio = $fechaInicio;
+
+        return $this;
+    }
+
+    public function getFechaTermino(): ?\DateTimeInterface
+    {
+        return $this->fechaTermino;
+    }
+
+    public function setFechaTermino(?\DateTimeInterface $fechaTermino): self
+    {
+        $this->fechaTermino = $fechaTermino;
+
+        return $this;
+    }
+
+    public function getEstado(): ?bool
+    {
+        return $this->estado;
+    }
+
+    public function setEstado(?bool $estado): self
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
 
 }

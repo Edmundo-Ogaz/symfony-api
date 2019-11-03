@@ -60,5 +60,70 @@ class ValoresNacional
      */
     private $idResolucionValor;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getGrado(): ?string
+    {
+        return $this->grado;
+    }
+
+    public function setGrado(?string $grado): self
+    {
+        $this->grado = $grado;
+
+        return $this;
+    }
+
+    public function getValor40(): ?float
+    {
+        return $this->valor40;
+    }
+
+    public function setValor40(?float $valor40): self
+    {
+        $this->valor40 = $valor40;
+
+        return $this;
+    }
+
+    public function getValor60(): ?float
+    {
+        return $this->valor60;
+    }
+
+    public function setValor60(?float $valor60): self
+    {
+        $this->valor60 = $valor60;
+
+        return $this;
+    }
+
+    public function getValor100(): ?float
+    {
+        return $this->valor100;
+    }
+
+    public function setValor100(?float $valor100): self
+    {
+        $this->valor100 = $valor100;
+
+        return $this;
+    }
+
+    public function getIdResolucionValor(): ?ResolucionValores
+    {
+        return $this->idResolucionValor;
+    }
+
+    public function setIdResolucionValor(?ResolucionValores $idResolucionValor): self
+    {
+        $this->idResolucionValor = $idResolucionValor;
+
+        return $this;
+    }
+
 
 }

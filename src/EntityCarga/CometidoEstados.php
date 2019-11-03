@@ -29,5 +29,22 @@ class CometidoEstados
      */
     private $estado;
 
+    public function getIdEstado(): ?int
+    {
+        return $this->idEstado;
+    }
+
+    public function getEstado(): ?string
+    {
+        return $this->estado;
+    }
+
+    public function setEstado(string $estado): self
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
 
 }
