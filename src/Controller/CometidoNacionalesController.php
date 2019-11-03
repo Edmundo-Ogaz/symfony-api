@@ -2,18 +2,40 @@
 // src/Controller/LuckyController.php
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Psr\Log\LoggerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\EntityCarga\CometidoNacional;
 
-class CometidoNacionalesController
+class CometidoNacionalesController extends Controller
 {
     public function __construct(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
 
+    public function get($id)
+    {
+        $cometidoNacional = $this->getDoctrine()
+            ->getRepository(CometidoNacional::class)
+            ->find($id);
 
-public function getAll()
+        if (!$cometidoNacional) {
+            throw $this->createNotFoundException(
+                'No cometido nacional found for id '.$id
+            );
+        }
+
+        // return new Response('Check out this great product: '.$cometidoNacional->getRut());
+
+        return $response = new JsonResponse(['rut' => $cometidoNacional->getRut()]);
+        // or render a template
+        // in the template, print things with {{ product.name }}
+        // return $this->render('product/show.html.twig', ['product' => $product]);
+    }
+
+
+    public function getAll()
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, 'http://host.docker.internal:3080/cometidonacionales/11');
@@ -35,8 +57,6 @@ public function getAll()
         $this->logger->info('LuckyController cometidonacionales dataResultConeccion: ' . $dataResultConeccion);
 
         curl_close($ch);
-        return new Response(
-            '<html><body>doce: '.$codigoReturn.'</body></html>'
-        );
+        return new JsonResponse($dataResultConeccion);
     }
 }

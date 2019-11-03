@@ -1,3 +1,9 @@
 cometidoNacionales:
     path: /cometidosNacionales
     controller: App\Controller\CometidoNacionalesController::getAll
+    methods:   [PUT]
+
+cometidoNacionales_get:
+    path: /cometidosNacionales/{id}
+    controller: App\Controller\CometidoNacionalesController::get
+    methods:   [GET]
