@@ -2,21 +2,24 @@
 // src/Controller/LuckyController.php
 namespace App\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Psr\Log\LoggerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\EntityCarga\CometidoNacional;
+use Doctrine\Common\Persistence\ObjectManager;
 
-class CometidoNacionalesController extends Controller
+class CometidoNacionalesController extends AbstractController
 {
-    public function __construct(LoggerInterface $logger)
+    public function __construct(ObjectManager $objectManager, LoggerInterface $logger)
     {
+        $this->objectManager = $objectManager;
         $this->logger = $logger;
     }
 
     public function get($id)
     {
-        $cometidoNacional = $this->getDoctrine()
+        $cometidoNacional = $this->objectManager
             ->getRepository(CometidoNacional::class)
             ->find($id);
 
@@ -26,37 +29,33 @@ class CometidoNacionalesController extends Controller
             );
         }
 
-        // return new Response('Check out this great product: '.$cometidoNacional->getRut());
-
+        $this->logger->info('cometidonacionales: ' . json_encode($cometidoNacional));
         return $response = new JsonResponse(['rut' => $cometidoNacional->getRut()]);
-        // or render a template
-        // in the template, print things with {{ product.name }}
-        // return $this->render('product/show.html.twig', ['product' => $product]);
     }
 
-
-    public function getAll()
+    public function getByRutAndEstado(Request $request)
     {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'http://host.docker.internal:3080/cometidonacionales/11');
-        curl_setopt($ch, CURLOPT_HEADER, 0);
+        $rut = $request->query->get('rut');
+        $estado = $request->query->get('estado');
 
-        $token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbnZpcm9ubWVudCI6IkRFVkVMT1BNRU5UIiwiYXBwbGljYXRpb25fbmFtZSI6InBtYy1iYXNlLWFwaSIsImlhdCI6MTU1MTgwODc2MCwiZXhwIjoxNjE0ODgwNzYwfQ.RXT_ngFVzqYQ9MHB8TTKV0IH7joFyk9HOv5liWBxOkK30gH5diB443QlctxhMEZ1OrSIEW3d_p0khV16yP6rwNWFcy6SRA5865OFQ0Dh-nmE4cHOZMbv_Gx16LAChHtmYu5IhCPHqXjiLXu1QJCdSwtc0_oUfCEXNgWG01sS3jxoFACUrFyz2wkSxcZ6uTeEHNS0UL84SOWZE-Sld8GuO9aA3wH63qqfu5pRBi1Pf4bRNLBNj-T6bSbIjBwFbcwZc1irhfHsymDfgowPG03BO-jWE4QtqZGDNe4ZYUxIVIUKlcAcSjPVl-9D1L6-fQhLEv1UzyhIFIcDA8LrUP4KKdL5bpBQr2YbRUXF70lWdvizYCoGWnFGPULmkd4xkWrdcwMOFajQtG2OzIqee-RiTchxeUfr-NySOsIcvcdYuEKn9sEnZ5RzlJBqnfP_i0lxj51TTs3KGuq78y-CFoPcjm2M1F1FQo8h8QFi-1TSBdZuzToSyyeNh-8bkjI8ud2PpRXUdE-KbmNvifsxr9fApwSSanFW1RJN97wNa2lJjWhwdK8XA7Pd3FtWGnqwSL1DiJkhSWF7KfekdD9w3DNuFmYmiBIlIdiDy9EwRXKoAeFMR-1OIR5E_AxxwPa1rPhNQKyfLbMxES1lWWzPIgkJPbwL897ZUBEV-rwKo36CpAo";
-        $authorization = "Authorization: Bearer ".$token; // Prepare the authorisation token
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array( $authorization )); // Inject the token into the header
+        $this->logger->info('Cometido nacionales controller request:' 
+        . ' rut: ' . $rut
+        . ' estado: ' . $estado);
 
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $dataResultConeccion = curl_exec($ch);
-        if (!curl_errno($ch)) {
-            $codigoReturn= curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        }else{
-            $codigoReturn="2001";
+        $cometidoNacional = $this->objectManager
+            ->getRepository(CometidoNacional::class)
+            ->findOneBy(array('rut' => $rut, 'idEstado' => $estado));
+
+        if (!$cometidoNacional) {
+            throw $this->createNotFoundException(
+                'No cometido nacional found for rut '.$rut.' and estado '.$estado
+            );
         }
 
-        $this->logger->info('LuckyController cometidonacionales code: ' . $codigoReturn);
-        $this->logger->info('LuckyController cometidonacionales dataResultConeccion: ' . $dataResultConeccion);
+        $this->logger->info('cometidonacionales: ' . json_encode($cometidoNacional));
 
-        curl_close($ch);
-        return new JsonResponse($dataResultConeccion);
+        return $response = new JsonResponse(['rut' => $cometidoNacional->getRut()]);
     }
+
+    
 }
